@@ -5,7 +5,7 @@ import { Cartes } from "./components/cartes/cartes";
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.html',
-  styleUrls: ['./app.scss'],
+  styleUrls: ['./app.component.scss'],
   imports: [Cartes],
 })
 export class App {
