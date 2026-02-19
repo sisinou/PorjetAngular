@@ -1,4 +1,4 @@
+<button (click)="toggleMonster()">toggle Monster</button>
 <div id="card-list">
-    <app-cartes/>
-    <app-cartes/>
-</div> 
+    <app-cartes [monster]="monsters[selectedMonsterIndex]"/>
+</div>

@@ -1,4 +1,7 @@
-import { Component, signal} from '@angular/core';
+import { MonsterType, MonsterTypeProperties } from './../../utils/monster.utils';
+import { Monster } from './../../models/monster.model';
+import { Component, Input, InputSignal, signal, input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+
 
 @Component({
   selector: 'app-cartes',
@@ -7,12 +10,18 @@ import { Component, signal} from '@angular/core';
   styleUrl: './cartes.scss',
 })
 
-export class Cartes {
+export class Cartes  implements OnChanges {
 
-  name: string = "My pokemon";
-  hp:number = 40;
-  figureCaption: string = "salameche";
-  attackName: string = "Boule de Feu";
-  attackDamage : number = 20;
-  attackDescription: string = "The target is struck with slender...";
+  @Input () monster = new Monster();
+  monsterTypeIcon : string = "https://upload.wikimedia.org/wikipedia/commons/a/a9/Pok%C3%A9mon_Electric_Type_Icon.svg";
+  backgroundColor : string = "Yellow";
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['monster']){
+      if (changes['monster'].previousValue?.type != changes['monster'].currentValue.type){ 
+        this.monsterTypeIcon = MonsterTypeProperties[this.monster.type].imageUrl;
+        this.backgroundColor = MonsterTypeProperties[this.monster.type].color;
+        }
+    }
+  }
 }

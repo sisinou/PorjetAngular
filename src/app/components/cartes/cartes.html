@@ -1,30 +1,30 @@
 <div id="card">
-    <div id="inside">
+    <div id="inside" [style.background-color]="backgroundColor">
         <header>
             <div class="left">
-                <div class="name">{{name}}</div>
+                <div class="name">{{monster.name}}</div>
             </div> 
             <div class="right">
-                <div class="HP">{{hp}}</div>
-                <img class="energy icon" src="https://raw.githubusercontent.com/partywhale/pokemon-type-icons/main/icons/fire.svg" alt="Fire">
+                <div class="HP">{{monster.hp}}</div>
+                <img class="energy icon" [src]="monsterTypeIcon">
             </div>
         </header>
         <figure id="art">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/4.svg" alt="pokemon">
-            <figcaption>{{figureCaption}}</figcaption>
+            <img [src]="monster.image">
+            <figcaption>{{monster.figureCaption}}</figcaption>
         </figure>
         <div id="Capacities">
             <div class="capacity">
                 <div class="main">
                     <div class="cost">
-                        <img class="icon Energy" src="https://raw.githubusercontent.com/partywhale/pokemon-type-icons/main/icons/fire.svg" alt="Fire">
-                        <img class="icon Energy" src="https://raw.githubusercontent.com/partywhale/pokemon-type-icons/main/icons/fire.svg" alt="Fire">
+                        <img class="icon Energy" [src]="monsterTypeIcon">
+                        <img class="icon Energy" [src]="monsterTypeIcon">
                     </div>
-                    <div class="name">{{attackName}}</div>
-                    <div class="damage">{{attackDamage}}</div>
+                    <div class="name">{{monster.attackName}}</div>
+                    <div class="damage">{{monster.attackDamage}}</div>
                 </div>
             </div> 
-            <div class="description">{{attackDescription}}</div>
+            <div class="description">{{monster.attackDescription}}</div>
         </div>
     </div>
 </div>
