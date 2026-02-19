@@ -17,13 +17,13 @@ export interface IMonsterProperties {
 }
 
 export const MonsterTypeProperties: {[key in MonsterType]: IMonsterProperties} = {
-    [MonsterType.Fire]: { imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pok%C3%A9mon_Fire_Type_Icon.svg', color: 'red' },
-    [MonsterType.Water]: { imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pok%C3%A9mon_Water_Type_Icon.svg', color: 'blue' },
-    [MonsterType.Grass]: { imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pok%C3%A9mon_Grass_Type_Icon.svg', color: 'green' },
-    [MonsterType.Electric]: { imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pok%C3%A9mon_Electric_Type_Icon.svg', color: 'yellow' },
-    [MonsterType.Psychic]: { imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pok%C3%A9mon_Psychic_Type_Icon.svg', color: 'purple' },
-    [MonsterType.Normal]: { imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pok%C3%A9mon_Normal_Type_Icon.svg', color: 'gray' },
-    [MonsterType.Fighting]: { imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pok%C3%A9mon_Fighting_Type_Icon.svg', color: 'brown' },
-    [MonsterType.Flying]: { imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pok%C3%A9mon_Flying_Type_Icon.svg', color: 'skyblue' },
-    [MonsterType.Poison]: { imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pok%C3%A9mon_Poison_Type_Icon.svg', color: 'violet' },
+    [MonsterType.Fire]: { imageUrl: 'https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/fire.svg', color: 'red' },
+    [MonsterType.Water]: { imageUrl: 'https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/water.svg', color: 'rgb(33, 136, 177)' },
+    [MonsterType.Grass]: { imageUrl: 'https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/grass.svg', color: 'green' },
+    [MonsterType.Electric]: { imageUrl: 'https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/electric.svg', color: 'yellow' },
+    [MonsterType.Psychic]: { imageUrl: 'https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/psychic.svg', color: 'purple' },
+    [MonsterType.Normal]: { imageUrl: 'https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/normal.svg', color: 'gray' },
+    [MonsterType.Fighting]: { imageUrl: 'https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/fighting.svg', color: 'brown' },
+    [MonsterType.Flying]: { imageUrl: 'https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/flying.svg', color: 'skyblue' },
+    [MonsterType.Poison]: { imageUrl: 'https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/poison.svg', color: 'violet' },
 };
