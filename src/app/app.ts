@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { Cartes } from "./components/cartes/cartes";
 import { Monster } from './models/monster.model';
 import { SearchBar } from "./components/search-bar/search-bar";
@@ -17,9 +17,13 @@ export class App {
   count : number = 0;
   search = "";
 
-  selectedMonsterIndex = 1;
+  selectedMonsterIndex = signal(1);
+  selectedMonster = computed(() => this.monsters[this.selectedMonsterIndex()]);
+
 
   constructor(){
+
+    effect(() => console.log("Selected monster : ", this.selectedMonster()));
     this.monsters = [];
     const monster1 = new Monster();
     monster1.name = "Salameche";
@@ -44,7 +48,7 @@ export class App {
   }
 
   toggleMonster(){
-    this.selectedMonsterIndex = (this.selectedMonsterIndex + 1) % this.monsters.length;
+    this.selectedMonsterIndex.set((this.selectedMonsterIndex() + 1) % this.monsters.length);
 
   }
 
