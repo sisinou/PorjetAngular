@@ -1,6 +1,9 @@
 import { MonsterType } from "../utils/monster.utils";
 
-export class Monster {
+
+export class MonsterModel  {
+
+    id: number = -1;
     name : string = "Pikachu";
     image: string = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png";
     type : MonsterType = MonsterType.Electric;
@@ -8,7 +11,11 @@ export class Monster {
     figureCaption : string = "salameche";
     
     attackName : string = "boule de feu"; 
-    attackDamage : number = 20;
+    attackStrength : number = 20;
     attackDescription : string = "The target is struck with slender...";
+
+    copy(): MonsterModel {
+        return Object.assign(new MonsterModel(), this);
+    }
 
 }

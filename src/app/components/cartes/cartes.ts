@@ -1,5 +1,5 @@
 import { MonsterType, MonsterTypeProperties } from './../../utils/monster.utils';
-import { Monster } from './../../models/monster.model';
+import { MonsterModel } from './../../models/monster.model';
 import { Component, Input, InputSignal, signal, input, OnInit, OnChanges, SimpleChanges, computed } from '@angular/core';
 
 
@@ -12,7 +12,7 @@ import { Component, Input, InputSignal, signal, input, OnInit, OnChanges, Simple
 
 export class Cartes {
 
-  monster = input(new Monster());
+  monster = input(new MonsterModel());
   monsterTypeIcon = computed(()=> MonsterTypeProperties[this.monster().type].imageUrl);
   backgroundColor = computed(() => MonsterTypeProperties[this.monster().type].color);
 

@@ -1,0 +1,20 @@
+<app-search-bar [(search)]="search"></app-search-bar>
+<div id="card-list">
+    @for(monster of filteredMonsters(); track monster.name; let i=$index){
+        <div>   
+            Index {{i}}
+        </div>
+        <app-cartes [monster]="monster"(click)="openMonster(monster)"/>
+    }   @empty {
+        <div class="center">No monster found!</div>
+    }
+</div>
+
+@if (filteredMonsters().length > 0){
+    <div class="center">found {{ filteredMonsters().length }} monsters found!</div>
+}
+
+<div class="center">
+    <button (click)="addMonster()">Add monster</button><br>
+</div>
+

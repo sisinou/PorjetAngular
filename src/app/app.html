@@ -1,15 +1,8 @@
-<app-search-bar [(search)]="search"></app-search-bar>
-<div id="card-list">
-    @for(monster of filteredMonsters(); track monster.name; let i=$index){
-        <div>   
-            Index {{i}}
-        </div>
-        <app-cartes [monster]="monster"/>
-    }   @empty {
-        <div class="center">No monster found!</div>
-    }
-</div>
-
-@if (filteredMonsters().length > 0){
-    <div class="center">found {{ filteredMonsters().length }} monsters found!</div>
+@if(loginService.user()) {
+    <mat-toolbar>
+        <button mat-icon-button (click)="navigateHome()"><mat-icon>home</mat-icon></button>
+        <p>Welcome {{loginService.user()?.firstName}} {{loginService.user()?.lastName}}</p>
+        <button mat-flat-button color="warn" (click)="logout()">Logout</button>
+    </mat-toolbar>
 }
+<router-outlet></router-outlet>
