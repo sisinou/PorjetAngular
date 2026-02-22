@@ -5,10 +5,12 @@ import { CommonModule } from '@angular/common';
 import { Cartes } from '../../components/cartes/cartes';
 import { SearchBar } from '../../components/search-bar/search-bar';
 import { Router } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { MatButton, MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-monster-list',
-  imports: [CommonModule, Cartes, SearchBar],
+  imports: [CommonModule, Cartes, SearchBar, MatButtonModule],
   templateUrl: './monster-list.html',
   styleUrl: './monster-list.scss',
 })
@@ -16,14 +18,12 @@ export class MonsterList {
   private monsterService = inject(MonsterService);
   private router = inject(Router);
    
-  monsters = signal<MonsterModel[]>([]);
+  monsters = toSignal(this.monsterService.getAllMonsters());
   search = model('')
+
   filteredMonsters = computed(() => {
-    return this.monsters().filter(monster => monster.name.includes(this.search()))
-  })
-  constructor() {
-    this.monsters.set(this.monsterService.getAllMonsters());
-  }
+    return this.monsters()?.filter(monster => monster.name.includes(this.search())) ?? [];
+  });
 
   addMonster() {
     this.router.navigate(['/Monster']);

@@ -4,7 +4,7 @@ import { MonsterModel } from './../../models/monster.model';
 import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { filter, of, Subscription, switchMap } from 'rxjs';
 import { Cartes } from "../../components/cartes/cartes";
 import { MatButtonModule } from '@angular/material/button'; 
 import { MatInputModule } from '@angular/material/input';
@@ -33,8 +33,7 @@ export class Monster implements OnInit, OnDestroy {
   private readonly dialog = inject(MatDialog);
 
   private router = inject(Router);
-  private formValueSubscription: Subscription | null = null;
-  private routeSubscription: Subscription | null = null;
+  private Subscription: Subscription = new Subscription();
 
   monsterId = signal<number | undefined>(undefined);
 
@@ -57,13 +56,17 @@ export class Monster implements OnInit, OnDestroy {
 
   submit(event: Event) {
     event.preventDefault();
+    let saveObservable;
     if (this.monsterID === -1){
-      this.monsterService.add(this.monster);
+      saveObservable = this.monsterService.add(this.monster);
     } else {
       this.monster.id = this.monsterID;
-      this.monsterService.update(this.monster);
+      saveObservable = this.monsterService.update(this.monster);
     }
-    this.navigateBack();
+    const saveSubscription = saveObservable.subscribe(_ =>{
+      this.navigateBack();
+    });
+    this.Subscription.add(saveSubscription);
   }
 
   navigateBack(){
@@ -73,37 +76,36 @@ export class Monster implements OnInit, OnDestroy {
 
   deleteMonster() {
     const dialogRef = this.dialog.open(DeleteMonsterConfirmationDialogue);
-    dialogRef.afterClosed().subscribe(confirmation =>{
-      if(confirmation){
-        this.monsterService.delete(this.monsterID)
-        this.navigateBack();
-      }
+    dialogRef.afterClosed().pipe(
+      filter(confirmation => confirmation),
+      switchMap(_ => this.monsterService.delete(this.monsterID))
+    ).subscribe(confirmation =>{
+      this.navigateBack();
     })
   }
 
 
   ngOnInit(): void {
-    this.formValueSubscription = this.formGroup.valueChanges.subscribe(data =>{
+    const formValueSubscription = this.formGroup.valueChanges.subscribe(data =>{
       this.monster = Object.assign(new MonsterModel(), data)
-    })
-    this.routeSubscription = this.route.params.subscribe(params => {
-      if(params['id']) {
-        this.monsterID = parseInt(params['id']);
-        this.monsterId.set(this.monsterID);
-        const monsterFound = this.monsterService.get(this.monsterID);
-        if(monsterFound) {
-          this.monster = monsterFound;
+    });
+    this.Subscription.add(formValueSubscription);
+    const routeSubscription = this.route.params.pipe(
+      switchMap(params => { if (params['id']){
+          this.monsterID = parseInt(params['id']);
+          return this.monsterService.get(this.monsterID);
+        }
+        return of(null);
+      })).subscribe(monster => { if(monster) {
+          this.monster = monster;
           this.formGroup.patchValue(this.monster)
-        } else {
-          this.monsterID = -1; 
-      }
-    }});
+        } 
+      });
+      this.Subscription.add(routeSubscription);
   }
 
   ngOnDestroy(): void {
-    this.routeSubscription?.unsubscribe();
-    this.formValueSubscription?.unsubscribe();
-
+    this.Subscription.unsubscribe();
   }
 
   next() {

@@ -78,9 +78,11 @@
         <input matInput type="text" formControlName="attackDescription"/>
         <mat-error>This field is invalid</mat-error>
     </mat-form-field>
-
+    
     <div class="button-container left">
+        @if (monsterID !== -1){
         <button mat-flat-button color="warn" type="button" (click)="deleteMonster()">Delete</button>
+    }
     </div>
     <div class="button-container right">
         <button mat-button type="button" (click)="navigateBack()"> Back </button>

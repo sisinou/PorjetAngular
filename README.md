@@ -1,59 +1,56 @@
-# EntrainemenAngular
+# Projet Angular - Gestion de Cartes Monstres
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2.
+TD projet d'entraînement Angular (v19+) pour gérer une collection de cartes de monstres (style TCG). L'application permet de créer, modifier, visualiser et supprimer des cartes via une interface utilisant Angular Material.
 
-## Development server
+## Fonctionnalités
 
-To start a local development server, run:
+*   **CRUD complet** : Création, lecture, mise à jour et suppression de monstres.
+*   **Formulaires Réactifs** :
+    *   Validation des champs (HP, Force d'attaque, etc.).
+    *   Gestion des erreurs avec `MatError`.
+    *   Upload d'image avec prévisualisation immédiate.
+*   **Navigation** : Système de routing avec paramètre dynamique (`/Monster/:id`).
+*   **Sécurité** : Protection des routes via un `Guard` (vérification de connexion).
+*   **UI/UX** : Utilisation des composants Angular Material (Inputs, Selects, Dialogues de confirmation).
 
+## Stack Technique
+
+*   **Frontend** : Angular (Standalone Components, Signals, RxJS).
+*   **UI** : Angular Material.
+*   **Backend** : API Python/Django (tourne sur le port 8000).
+
+## Installation et Lancement
+
+### 1. Prérequis Backend
+Assurez-vous que l'API Django est lancée pour que les requêtes HTTP fonctionnent. Pour lancer le Back END 
+
+### Première installation :
+
+Double-cliquez sur setup.bat
+Attendez la fin de l'installation
+Démarrages suivants :
+
+### Double-cliquez sur start_server.bat
+
+start_server.bat - Démarrage du serveur (Windows)
+create_default_admin.bat - Création du compte admin
+create_admin.py - Script Python pour créer l'admin
+create_default_admin.sh - Version Linux (bonus)
+IDENTIFIANTS.txt - Fichier avec les identifiants
+
+nom d'utilisateur: admin
+mot de passe: admin123
+
+### 2. Lancer le Frontend
+Installez les dépendances :
+```bash
+npm install
+```
+
+Lancez le serveur de développement :
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
